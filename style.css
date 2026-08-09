@@ -1,4 +1,6 @@
 .screen{
+    display: flex;
+    
 }
 
 .outer-container {
@@ -28,13 +30,14 @@ button {
 
 .inner-container {
     background-color: black;
-    width:400px;
-    height:600px;
+    width:320px;
+    height:520px;
     display: flex;
     flex-direction: column;
     gap:45px;
     align-items: center;
     justify-content: center;
+    border-radius: 20px;
 
 
 }

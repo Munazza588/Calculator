@@ -27,3 +27,21 @@ function operate(operator,a,b) {
     }
     return result;
 }
+
+let num1;
+let num2;
+let operator;
+
+function updateNumOne() {
+    const numOneElement = document.querySelector('.first-num');
+    const numButton = document.querySelectorAll('.numbers');
+    numButton.forEach((button) => {
+        button.addEventListener("click",(event) => {
+            num1 = event.target.textContent;
+            numOneElement.textContent = num1;
+        })
+    })
+}
+
+updateNumOne();
+
