@@ -32,16 +32,64 @@ let num1;
 let num2;
 let operator;
 
+
 function updateNumOne() {
-    const numOneElement = document.querySelector('.first-num');
+    const numOneElement = document.querySelector(`.first-num`);
     const numButton = document.querySelectorAll('.numbers');
     numButton.forEach((button) => {
         button.addEventListener("click",(event) => {
-            num1 = event.target.textContent;
-            numOneElement.textContent = num1;
+            if(operator === undefined) {
+                console.log(operator);
+                num1 = event.target.textContent;
+                numOneElement.textContent = num1;
+            }else {
+                numButton.forEach((button) => {
+                    button.removeEventListener('click',() => {
+                        console.log('removed');
+                    })
+                });
+            }
+            
+        });
+    })
+}
+
+function updateNumTwo() {
+    const numTwoElement = document.querySelector('.second-num');
+    const numButton = document.querySelectorAll('.numbers');
+    numButton.forEach((button) => {
+        button.addEventListener("click",(event) => {
+            num2 = event.target.textContent;
+            numTwoElement.textContent = num2;
+            calculate();
         })
     })
 }
 
+
+
+function changeOperator() {
+    const operatorElement = document.querySelector('.op');
+    const operationButtons = document.querySelectorAll('.operation');
+    operationButtons.forEach((button) => {
+        button.addEventListener("click",(event) => {
+            operator = event.target.textContent;
+            updateNumTwo();
+            operatorElement.textContent = operator;
+        })
+    })
+}
+
+function calculate() {
+    const EqualElement = document.querySelector('.calculate');
+    const display = document.querySelector('.screen')
+    const result = operate(operator,num1,num2);
+    console.log(result);
+    EqualElement.addEventListener('click',() => {
+        display.textContent = result;
+    })
+}
 updateNumOne();
+changeOperator();
+
 
