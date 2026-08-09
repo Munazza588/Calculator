@@ -71,14 +71,21 @@ function updateNumTwo() {
 function changeOperator() {
     const operatorElement = document.querySelector('.op');
     const operationButtons = document.querySelectorAll('.operation');
-    operationButtons.forEach((button) => {
-        button.addEventListener("click",(event) => {
+
+    const handleClick = (event) => {
             operator = event.target.textContent;
             updateNumTwo();
             operatorElement.textContent = operator;
-        })
-    })
-}
+            operationButtons.forEach((button) => {
+                button.removeEventListener('click',handleClick);
+            });
+    };
+
+    operationButtons.forEach((button) => {
+        button.addEventListener("click",handleClick);
+        });
+    }
+
 
 function calculate() {
     const EqualElement = document.querySelector('.calculate');
