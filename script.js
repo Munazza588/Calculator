@@ -13,3 +13,17 @@ function multiply(a,b) {
 function divide(a,b) {
     return a / b;
 }
+
+function operate(operator,a,b) {
+    let result;
+    if (operator === "+") {
+        result = add(a,b);
+    }else if(operator === "-") {
+        result = subtract(a,b);
+    }else if(operator === "*") {
+        result = multiply(a,b);
+    }else if(operator === "/") {
+        result = divide(a,b);
+    }
+    return result;
+}
