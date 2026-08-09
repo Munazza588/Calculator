@@ -1,0 +1,68 @@
+.screen{
+}
+
+.outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height:100vh;
+}
+
+.first {
+    background-color: grey;
+    border-radius:45px;
+    padding:15px 20px;
+    font-size: 20px;
+}
+
+button {
+    background-color: rgb(67, 67, 67);
+    padding:12px 20px;
+    font-size: 26px;
+    border-radius: 45px;
+    color:white;
+    
+    
+}
+
+.inner-container {
+    background-color: black;
+    width:400px;
+    height:600px;
+    display: flex;
+    flex-direction: column;
+    gap:45px;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+body {
+    
+    color:white;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap:6px;
+
+}
+
+.first-row, .second-row,.third-row,.forth-row,.fifth-row {
+    display: flex;
+    gap:7px;
+}
+
+.fifth-row {
+    display: flex;
+    gap:135px;
+}
+
+.operator {
+    background-color: orange;
+    border:none;
+}
+
