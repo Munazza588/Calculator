@@ -28,8 +28,8 @@ function operate(operator,a,b) {
     return result;
 }
 
-let num1;
-let num2;
+let num1 ="";
+let num2 = "";
 let operator;
 
 
@@ -39,8 +39,7 @@ function updateNumOne() {
     numButton.forEach((button) => {
         button.addEventListener("click",(event) => {
             if(operator === undefined) {
-                console.log(operator);
-                num1 = event.target.textContent;
+                num1 += event.target.textContent;
                 numOneElement.textContent = num1;
             }else {
                 numButton.forEach((button) => {
@@ -59,7 +58,7 @@ function updateNumTwo() {
     const numButton = document.querySelectorAll('.numbers');
     numButton.forEach((button) => {
         button.addEventListener("click",(event) => {
-            num2 = event.target.textContent;
+            num2 += event.target.textContent;
             numTwoElement.textContent = num2;
             calculate();
         })
@@ -90,13 +89,25 @@ function changeOperator() {
 function calculate() {
     const EqualElement = document.querySelector('.calculate');
     const display = document.querySelector('.screen')
-    const result = operate(operator,num1,num2);
+    const result = operate(operator,Number(num1),Number(num2));
     console.log(result);
     EqualElement.addEventListener('click',() => {
         display.textContent = result;
     })
 }
+
+function clear() {
+    const clearButton = document.querySelector(".clear");
+    const display = document.querySelector('.screen');
+    clearButton.addEventListener("click", () => {
+        display.textContent = "";
+    })
+}
+
+
+
 updateNumOne();
 changeOperator();
+clear();
 
 
