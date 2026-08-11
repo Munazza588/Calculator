@@ -31,38 +31,52 @@ function operate(operator,a,b) {
 let num1 ="";
 let num2 = "";
 let operator;
+let result;
 
 
 function updateNumOne() {
     const numOneElement = document.querySelector(`.first-num`);
     const numButton = document.querySelectorAll('.numbers');
-    numButton.forEach((button) => {
-        button.addEventListener("click",(event) => {
+
+    const handleClick = (event) => {
+        console.log("NUM1 handler");
             if(operator === undefined) {
                 num1 += event.target.textContent;
                 numOneElement.textContent = num1;
             }else {
+                console.log('trying to remove listeners');
                 numButton.forEach((button) => {
-                    button.removeEventListener('click',() => {
-                        console.log('removed');
-                    })
+                    button.removeEventListener('click',handleClick);
                 });
+                updateNumTwo();
             }
             
-        });
+        }
+    //changeOperator();
+    numButton.forEach((button) => {
+        button.addEventListener("click",handleClick);
     })
 }
 
 function updateNumTwo() {
+    console.log("NUM2 handler");
     const numTwoElement = document.querySelector('.second-num');
     const numButton = document.querySelectorAll('.numbers');
-    numButton.forEach((button) => {
-        button.addEventListener("click",(event) => {
+
+    const handleClick = (event) => {
+        console.log(num2);
             num2 += event.target.textContent;
+            //console.log(num2);
             numTwoElement.textContent = num2;
-            calculate();
-        })
-    })
+            numButton.forEach((button) => {
+                button.removeEventListener('click',handleClick);
+            
+    });
+}
+
+    numButton.forEach((button) => {
+        button.addEventListener("click",handleClick);
+    });
 }
 
 
@@ -73,13 +87,13 @@ function changeOperator() {
 
     const handleClick = (event) => {
             operator = event.target.textContent;
-            updateNumTwo();
             operatorElement.textContent = operator;
             operationButtons.forEach((button) => {
                 button.removeEventListener('click',handleClick);
             });
     };
 
+    //updateNumTwo();
     operationButtons.forEach((button) => {
         button.addEventListener("click",handleClick);
         });
@@ -87,14 +101,30 @@ function changeOperator() {
 
 
 function calculate() {
+    console.log("calculate Handler");
+    const numOneElement = document.querySelector(`.first-num`);
+    const operatorElement = document.querySelector('.op');
     const EqualElement = document.querySelector('.calculate');
-    const display = document.querySelector('.screen')
-    const result = operate(operator,Number(num1),Number(num2));
-    console.log(result);
-    EqualElement.addEventListener('click',() => {
-        display.textContent = result;
-    })
+    const numTwoElement = document.querySelector('.second-num');
+
+    const handleClick = () => {
+        result = operate(operator,Number(num1),Number(num2));
+        //console.log(num2);
+        numOneElement.textContent = result;
+        operatorElement.textContent = "";
+        numTwoElement.textContent = "";
+        num1= result;
+        operator = undefined;
+        num2= "";
+        
+        EqualElement.removeEventListener('click',handleClick);
+    }
+
+    
+    EqualElement.addEventListener('click',handleClick);
+    
 }
+
 
 function clear() {
     const clearButton = document.querySelector(".clear");
@@ -108,6 +138,6 @@ function clear() {
 
 updateNumOne();
 changeOperator();
-clear();
+//updateNumTwo();
 
 
